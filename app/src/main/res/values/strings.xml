@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">DaggerKotlin</string>
+    <string name="text_login_hint">Enter any digit b/w 1 to 10</string>
+    <string name="login_btn_text">Login</string>
+    <string name="wrong_input">Did you enter a number between 1 and 10?</string>
+</resources>
