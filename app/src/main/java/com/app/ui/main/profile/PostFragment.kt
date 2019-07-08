@@ -9,18 +9,23 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.app.daggerkotlin.R
+import com.app.models.Post
 import com.app.util.NetworkResource
 import com.app.util.SessionManager
 import com.app.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.util.ArrayList
 import javax.inject.Inject
+import com.app.util.VerticalSpaceItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 
 class PostFragment : DaggerFragment()
 {
     @Inject lateinit var providerFactory: ViewModelProviderFactory
     private lateinit var profileViewModel : PostViewModel
     @Inject lateinit var sessionManager : SessionManager
+    @Inject lateinit var postAdapter: PostAdapter
 
     private val TAG : String = "AuthActivity"
 
@@ -35,6 +40,7 @@ class PostFragment : DaggerFragment()
 
         profileViewModel = ViewModelProviders.of(this,providerFactory).get(PostViewModel::class.java)
 
+        initRecyclerView()
         subscribeObservers()
     }
 
@@ -56,12 +62,8 @@ class PostFragment : DaggerFragment()
                 {
                     Log.e(TAG, "PostFragment: NetworkResource Success...")
                     if(it.data != null)
-                    {
-                        Log.e(TAG,"PostFragment id: "+it.data[0].id)
-                        Log.e(TAG,"PostFragment userId: "+it.data[0].userId)
-                        Log.e(TAG,"PostFragment Title: "+it.data[0].Title)
-                        Log.e(TAG,"PostFragment Body: "+it.data[0].Body)
-                    }
+                        postAdapter.updateData(it.data as ArrayList<Post>)
+
                     showProgressBar(false)
                 }
 
@@ -73,6 +75,13 @@ class PostFragment : DaggerFragment()
                 }
             }
         })
+    }
+
+    private fun initRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        val itemDecoration = VerticalSpaceItemDecoration(15)
+        recyclerView.addItemDecoration(itemDecoration)
+        recyclerView.adapter = postAdapter
     }
 
     private fun showProgressBar(display : Boolean)

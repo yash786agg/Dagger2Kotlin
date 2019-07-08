@@ -12,7 +12,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/recycler_view"/>
+            android:id="@+id/recyclerView"/>
 
     <ProgressBar
             app:layout_constraintTop_toTopOf="parent"

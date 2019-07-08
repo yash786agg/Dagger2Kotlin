@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+                name="dataManager"
+                type="com.app.models.Post"/>
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/dimen_17sp"
+                android:padding="@dimen/dimen_5dp"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:layout_marginEnd="@dimen/dimen_5dp"
+                android:text="@{dataManager.Title}"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/dimen_17sp"
+                android:padding="5dp"
+                android:layout_marginEnd="@dimen/dimen_5dp"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/dimen_7dp"
+                android:text="@{dataManager.Body}"/>
+
+    </LinearLayout>
+
+</layout>
