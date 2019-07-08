@@ -1,7 +1,6 @@
 package com.app.ui.main.profile
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.app.models.Post
@@ -18,14 +17,11 @@ class PostViewModel @Inject constructor(app : Application) : AndroidViewModel(ap
 {
     private var userPost : MutableLiveData<NetworkResource<List<Post>>>? = null
     private lateinit var postApi : PostApi
-    private val TAG : String = "AuthActivity"
 
     @Inject
     fun ProfileViewModel(postApi: PostApi)
     {
         this.postApi = postApi
-
-        Log.e(TAG, "PostViewModel: viewModel is working...")
     }
 
     fun getUserPostData(userId : Int) : MutableLiveData<NetworkResource<List<Post>>>
@@ -54,9 +50,6 @@ class PostViewModel @Inject constructor(app : Application) : AndroidViewModel(ap
 
                 withContext(Dispatchers.Main) {
                     // Perform operations on the main thread
-
-                    Log.e(TAG, "PostViewModel: UserData response: $response")
-
                     userPost!!.value = NetworkResource.Success(response)
                 }
             }
@@ -64,12 +57,8 @@ class PostViewModel @Inject constructor(app : Application) : AndroidViewModel(ap
             {
                 e.printStackTrace()
 
-                Log.e(TAG, "PostViewModel: HttpException message: ${e.message()}")
-                Log.e(TAG, "PostViewModel: HttpException code: ${e.code()}")
-
                 withContext(Dispatchers.Main) {
                     // Perform operations on the main thread
-
                     userPost!!.value = NetworkResource.Error(e.code().toString(),null)
                 }
             }

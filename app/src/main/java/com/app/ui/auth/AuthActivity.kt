@@ -1,11 +1,9 @@
 package com.app.ui.auth
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -24,17 +22,10 @@ import javax.inject.Inject
 
 class AuthActivity : DaggerAppCompatActivity(),View.OnClickListener
 {
-    @Inject
-    lateinit var draweeController : PipelineDraweeControllerBuilder
-
-    @Inject
-    lateinit var providerFactory: ViewModelProviderFactory
-
+    @Inject lateinit var draweeController : PipelineDraweeControllerBuilder
+    @Inject lateinit var providerFactory: ViewModelProviderFactory
     private lateinit var authViewModel : AuthViewModel
-
     @Inject lateinit var sessionManager : SessionManager
-
-    private val TAG : String = "AuthActivity"
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -79,28 +70,16 @@ class AuthActivity : DaggerAppCompatActivity(),View.OnClickListener
                     is NetworkResource.Loading ->
                     {
                         sessionManager.setLogIn(false)
-                        Log.e(TAG, "SessionManager isLogIn second: ${sessionManager.isLogIn()}")
                         showProgressBar(true)
-                        Log.e(TAG, "AuthActivity: NetworkResource Loading...")
                     }
 
                     is NetworkResource.Success ->
                     {
-                        Log.e(TAG, "AuthActivity: NetworkResource Success...")
-                        if(it.data != null)
-                        {
-                            Log.e(TAG,"AuthActivity email: "+it.data.email)
-                            Log.e(TAG, "AuthActivity name: "+it.data.name)
-                        }
                         showProgressBar(false)
 
                         sessionManager.setLogIn(true)
 
-                        Log.e(TAG, "AuthActivity: userId...$userId")
-
                         sessionManager.setUserId(userId)
-
-                        Log.e(TAG, "SessionManager isLogIn third: ${sessionManager.isLogIn()}")
 
                         moveToNextScreen()
                     }
@@ -108,7 +87,6 @@ class AuthActivity : DaggerAppCompatActivity(),View.OnClickListener
                     is NetworkResource.Error ->
                     {
                         showProgressBar(false)
-                        Log.e(TAG, "AuthActivity: NetworkResourceError..."+ it.message)
                         Toast.makeText(this,it.message, Toast.LENGTH_SHORT).show()
                     }
                 }

@@ -1,7 +1,6 @@
 package com.app.ui.main.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +26,6 @@ class PostFragment : DaggerFragment()
     @Inject lateinit var sessionManager : SessionManager
     @Inject lateinit var postAdapter: PostAdapter
 
-    private val TAG : String = "AuthActivity"
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         return inflater.inflate(R.layout.fragment_profile,container,false)
@@ -46,8 +43,6 @@ class PostFragment : DaggerFragment()
 
     private fun subscribeObservers() {
 
-        Log.e(TAG, "PostFragment: userId... "+sessionManager.isUserId())
-
         profileViewModel.getUserPostData(sessionManager.isUserId()!!).observe(viewLifecycleOwner, Observer {
 
             when(it)
@@ -55,12 +50,10 @@ class PostFragment : DaggerFragment()
                 is NetworkResource.Loading ->
                 {
                     showProgressBar(true)
-                    Log.e(TAG, "PostFragment: NetworkResource Loading...")
                 }
 
                 is NetworkResource.Success ->
                 {
-                    Log.e(TAG, "PostFragment: NetworkResource Success...")
                     if(it.data != null)
                         postAdapter.updateData(it.data as ArrayList<Post>)
 
@@ -70,7 +63,6 @@ class PostFragment : DaggerFragment()
                 is NetworkResource.Error ->
                 {
                     showProgressBar(false)
-                    Log.e(TAG, "PostFragment: NetworkResourceError..."+ it.message)
                     Toast.makeText(activity,it.message, Toast.LENGTH_SHORT).show()
                 }
             }

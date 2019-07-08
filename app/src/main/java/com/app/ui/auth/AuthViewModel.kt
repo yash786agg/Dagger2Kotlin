@@ -1,7 +1,6 @@
 package com.app.ui.auth
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.app.network.auth.AuthApi
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +21,6 @@ import com.app.util.NetworkResource
 
 class AuthViewModel @Inject constructor(app: Application/*, private val repository: MainRepository*/): AndroidViewModel(app)
 {
-    private val TAG : String = "AuthActivity"
     private lateinit var authApi: AuthApi
 
     private var authUser : MutableLiveData<NetworkResource<User>>? = null
@@ -31,7 +29,6 @@ class AuthViewModel @Inject constructor(app: Application/*, private val reposito
     fun AuthViewModel(authApi: AuthApi)
     {
         this.authApi = authApi
-        Log.e(TAG, "AuthViewModel: viewModel is working...")
     }
 
     fun getAuthUserData(userId : Int) : MutableLiveData<NetworkResource<User>>
@@ -60,18 +57,12 @@ class AuthViewModel @Inject constructor(app: Application/*, private val reposito
 
                 withContext(Dispatchers.Main) {
                     // Perform operations on the main thread
-
-                    Log.e(TAG, "AuthViewModel: UserData response: $response")
-
                     authUser!!.value = NetworkResource.Success(response)
                 }
             }
             catch (e: HttpException)
             {
                 e.printStackTrace()
-
-                Log.e(TAG, "AuthViewModel: HttpException message: ${e.message()}")
-                Log.e(TAG, "AuthViewModel: HttpException code: ${e.code()}")
 
                 withContext(Dispatchers.Main) {
                     // Perform operations on the main thread
