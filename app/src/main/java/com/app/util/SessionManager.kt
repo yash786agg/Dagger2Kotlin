@@ -1,7 +1,6 @@
 package com.app.util
 
 import android.content.SharedPreferences
-import com.app.models.User
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,8 +18,18 @@ class SessionManager @Inject constructor(private val sharedPreferences: SharedPr
         return sharedPreferences.getBoolean(Constants.logInSess, false)
     }
 
-    fun setLogIn(expiresIn: Boolean)
+    fun setLogIn(value: Boolean)
     {
-        sharedPreferences.edit().putBoolean(Constants.logInSess, expiresIn).apply()
+        sharedPreferences.edit().putBoolean(Constants.logInSess, value).apply()
+    }
+
+    fun isUserId(): Int?
+    {
+        return sharedPreferences.getInt(Constants.userIdSess, 0)
+    }
+
+    fun setUserId(value: Int)
+    {
+        sharedPreferences.edit().putInt(Constants.userIdSess, value).apply()
     }
 }

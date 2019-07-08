@@ -7,7 +7,6 @@ import retrofit2.http.Query
 
 interface PostApi
 {
-    // /posts?userId=1/
     @GET("posts")
-    fun getPostsFromUser(@Query("userId") id: Int): Deferred<List<Post>>
+    fun getPosts(@Query("userId") id: Int): Deferred<List<Post>>
 }

@@ -12,9 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.app.daggerkotlin.R
 import com.app.ui.main.MainActivity
-import com.app.util.Constants
+import com.app.util.Constants.Companion.imageUrl
 import com.app.util.NetworkResource
-import com.app.util.PreferencesHelper
 import com.app.util.SessionManager
 import com.app.viewmodels.ViewModelProviderFactory
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder
@@ -30,14 +29,10 @@ class AuthActivity : DaggerAppCompatActivity(),View.OnClickListener
 
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
-    //@Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var authViewModel : AuthViewModel
 
-    @Inject lateinit var sharedPreferences: SharedPreferences
-
     @Inject lateinit var sessionManager : SessionManager
-    //@Inject lateinit var preferencesHelper : PreferencesHelper
 
     private val TAG : String = "AuthActivity"
 
@@ -49,35 +44,12 @@ class AuthActivity : DaggerAppCompatActivity(),View.OnClickListener
         if(sessionManager.isLogIn()!!)
             moveToNextScreen()
 
-        Log.e(TAG, "draweeController First: $draweeController")
-
-       // sessionManager = SessionManager(sharedPreferences)
-
-        Log.e(TAG, "sharedPreferences: ${sharedPreferences}")
-
-        Log.e(TAG, "PreferencesHelper: ${sessionManager}")
-
-        Log.e(TAG, "PreferencesHelper isLogIn first: ${sessionManager.isLogIn()}")
-
-        //Log.e(TAG, "PreferencesHelper isLogIn first: ${preferencesHelper.getBoolean(Constants.logInSess)}")
-
-        val imageUrlFirst = "https://static01.nyt.com/images/2015/08/18/business/18EMPLOY/18EMPLOY-thumbStandard.jpg"
-        val draweeControllerFirst = draweeController.setImageRequest(ImageRequest.fromUri(Uri.parse(imageUrlFirst))).setOldController(fresco_ImageView.controller).build()
-        fresco_ImageView.controller = draweeControllerFirst
+        val drawController = draweeController.setImageRequest(ImageRequest.fromUri(Uri.parse(imageUrl))).setOldController(fresco_ImageView.controller).build()
+        fresco_ImageView.controller = drawController
 
         login_button.setOnClickListener(this)
 
         authViewModel = ViewModelProviders.of(this,providerFactory).get(AuthViewModel::class.java)
-        //authViewModel = ViewModelProviders.of(this, viewModelFactory).get(AuthViewModel::class.java)
-
-        /*authViewModel.getAuthUserData(8).observe(this, Observer {
-
-            if(it != null)
-            {
-                Log.e(TAG,"AuthActivity email: "+it.email)
-                Log.e(TAG, "AuthActivity name: "+it.name)
-            }
-        })*/
     }
 
     override fun onClick(v: View?) {
@@ -123,6 +95,10 @@ class AuthActivity : DaggerAppCompatActivity(),View.OnClickListener
                         showProgressBar(false)
 
                         sessionManager.setLogIn(true)
+
+                        Log.e(TAG, "AuthActivity: userId...$userId")
+
+                        sessionManager.setUserId(userId)
 
                         Log.e(TAG, "SessionManager isLogIn third: ${sessionManager.isLogIn()}")
 

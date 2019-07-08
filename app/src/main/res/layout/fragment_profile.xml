@@ -3,40 +3,28 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@android:color/white">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/email"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/dimen_17sp"
-            android:layout_marginTop="@dimen/dimen_30dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler_view"/>
 
-    <TextView
-            app:layout_constraintTop_toBottomOf="@+id/email"
+    <ProgressBar
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/username"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/dimen_17sp"
-            android:layout_marginTop="@dimen/dimen_16dp"/>
-
-    <TextView
-            app:layout_constraintTop_toBottomOf="@+id/username"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/website"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/dimen_17sp"
-            android:layout_marginTop="@dimen/dimen_16dp"/>
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_centerInParent="true"
+            android:id="@+id/progress_bar"
+            android:visibility="gone"
+            android:elevation="@dimen/dimen_20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
