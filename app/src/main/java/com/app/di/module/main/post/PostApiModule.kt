@@ -1,4 +1,4 @@
-package com.app.di.module.post
+package com.app.di.module.main.post
 
 import com.app.network.post.PostApi
 import com.app.ui.main.profile.PostAdapter

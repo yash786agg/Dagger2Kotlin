@@ -1,6 +1,6 @@
 package com.app.daggerkotlin
 
-import com.app.di.DaggerAppComponent
+import com.app.di.component.DaggerAppComponent
 import com.facebook.drawee.backends.pipeline.Fresco
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
@@ -13,5 +13,4 @@ class BaseApplication : DaggerApplication()
 
        return DaggerAppComponent.builder().application(this).build()
     }
-
 }

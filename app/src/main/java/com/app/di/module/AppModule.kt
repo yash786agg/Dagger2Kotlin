@@ -1,4 +1,4 @@
-package com.app.di
+package com.app.di.module
 
 import android.app.Application
 import com.app.util.Constants
