@@ -11,7 +11,7 @@ import com.app.daggerkotlin.databinding.ListItemNewsBinding
 import com.app.models.NewsEntity
 import java.util.ArrayList
 
-class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.MyViewHolder>()
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.MyViewHolder>()
 {
     private var newsItemList: ArrayList<NewsEntity> = ArrayList()
     private var clickListener : RcylcvItemClick? = null
@@ -32,15 +32,9 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.MyViewHolder>()
     }
 
     // Gets the number of Items in the list
-    override fun getItemCount(): Int
-    {
-        return newsItemList.size
-    }
+    override fun getItemCount(): Int = newsItemList.size
 
-    override fun getItemViewType(position: Int): Int
-    {
-        return position
-    }
+    override fun getItemViewType(position: Int): Int = position
 
     // UpdateData method is to add items in the newsItemList and notify the adapter for the data change.
     fun updateData(newsItemList: ArrayList<NewsEntity>)
@@ -49,8 +43,7 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.MyViewHolder>()
         notifyDataSetChanged()
     }
 
-    fun setOnItemClickListener(mItemClickListener : RcylcvItemClick)
-    {
+    fun setOnItemClickListener(mItemClickListener : RcylcvItemClick) {
         this.clickListener = mItemClickListener
     }
 

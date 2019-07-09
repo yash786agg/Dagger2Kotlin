@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.app.util.PreferencesHelper
 import com.app.util.SessionManager
 
 @Module
@@ -26,11 +25,9 @@ class AppModule
     companion object
     {
         @JvmStatic
+        @Singleton
         @Provides
-        fun providesDraweeController() : PipelineDraweeControllerBuilder
-        {
-            return Fresco.newDraweeControllerBuilder()
-        }
+        fun providesDraweeController() : PipelineDraweeControllerBuilder = Fresco.newDraweeControllerBuilder()
 
         @JvmStatic
         @Singleton

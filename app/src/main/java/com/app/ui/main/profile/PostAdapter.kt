@@ -29,15 +29,9 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.MyViewHolder>()
     }
 
     // Gets the number of Items in the list
-    override fun getItemCount(): Int
-    {
-        return postItemList.size
-    }
+    override fun getItemCount(): Int = postItemList.size
 
-    override fun getItemViewType(position: Int): Int
-    {
-        return position
-    }
+    override fun getItemViewType(position: Int): Int = position
 
     // UpdateData method is to add items in the postItemList and notify the adapter for the data change.
     fun updateData(postItemList: ArrayList<Post>)
@@ -50,8 +44,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.MyViewHolder>()
     {
         var dataItemBinding : PostItemAdapterBinding = dataItemLayoutBinding
 
-        init
-        {
+        init {
             dataItemLayoutBinding.root.tag = dataItemLayoutBinding.root
         }
     }
