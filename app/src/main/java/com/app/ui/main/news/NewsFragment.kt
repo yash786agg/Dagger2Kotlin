@@ -42,7 +42,6 @@ class NewsFragment : DaggerFragment(), RcylcvItemClick
 
     private fun subscribeObservers()
     {
-
         newsViewModel.newsList().observe(viewLifecycleOwner, Observer {
 
             when(it)
