@@ -3,6 +3,10 @@ package com.app.util
 import android.content.SharedPreferences
 import javax.inject.Inject
 import javax.inject.Singleton
+import android.R.id.edit
+import android.text.method.TextKeyListener.clear
+
+
 
 // Link -> https://stackoverflow.com/questions/48920133/singleton-sharedpreferences-with-dagger-2
 
@@ -31,5 +35,10 @@ class SessionManager @Inject constructor(private val sharedPreferences: SharedPr
     fun setUserId(value: Int)
     {
         sharedPreferences.edit().putInt(Constants.userIdSess, value).apply()
+    }
+
+    fun clear()
+    {
+        sharedPreferences.edit().clear().apply()
     }
 }

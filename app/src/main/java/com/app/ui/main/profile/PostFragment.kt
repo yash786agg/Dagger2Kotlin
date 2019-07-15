@@ -13,7 +13,7 @@ import com.app.util.NetworkResource
 import com.app.util.SessionManager
 import com.app.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_post.*
 import java.util.ArrayList
 import javax.inject.Inject
 import com.app.util.VerticalSpaceItemDecoration
@@ -28,7 +28,7 @@ class PostFragment : DaggerFragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
-        return inflater.inflate(R.layout.fragment_profile,container,false)
+        return inflater.inflate(R.layout.fragment_post,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/main"
+            app:startDestination="@+id/postScreen">
+
+    <fragment
+            android:id="@+id/postScreen"
+            android:name="com.app.ui.main.profile.PostFragment"
+            android:label="@string/fragment_post"
+            tools:layout="@layout/fragment_post">
+    </fragment>
+
+    <fragment
+            android:id="@+id/newsScreen"
+            android:name="com.app.ui.main.news.NewsFragment"
+            android:label="@string/fragment_news"
+            tools:layout="@layout/fragment_news">
+    </fragment>
+
+
+
+</navigation>
