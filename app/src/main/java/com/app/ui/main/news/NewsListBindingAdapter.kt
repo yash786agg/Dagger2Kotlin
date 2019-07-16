@@ -5,11 +5,11 @@ import android.text.TextUtils
 import androidx.databinding.BindingAdapter
 import com.app.daggerkotlin.R
 import com.app.models.NewsEntity
+import com.facebook.drawee.view.SimpleDraweeView
+import com.facebook.imagepipeline.request.ImageRequest
 import com.app.util.Constants.Companion.httpTag
 import com.app.util.Constants.Companion.httpsTag
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.view.SimpleDraweeView
-import com.facebook.imagepipeline.request.ImageRequest
 
 object NewsListBindingAdapter
 {
@@ -24,7 +24,7 @@ object NewsListBindingAdapter
             if (!TextUtils.isEmpty(thumbnailURL))
             {
                 val draweeController = Fresco.newDraweeControllerBuilder().setImageRequest(ImageRequest.fromUri(Uri.parse(thumbnailURL)))
-                        .setOldController(imageView.controller).build()
+                    .setOldController(imageView.controller).build()
                 imageView.controller = draweeController
             }
         }

@@ -11,6 +11,7 @@ class AuthApiModule
     @Module
     companion object
     {
+        @AuthScope
         @Provides
         @JvmStatic
         fun provideAuthApi(retrofit: Retrofit) : AuthApi

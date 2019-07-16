@@ -1,8 +1,10 @@
 package com.app.di.module
 
 import com.app.di.module.auth.AuthApiModule
+import com.app.di.module.auth.AuthScope
 import com.app.di.module.auth.AuthViewModelsModule
 import com.app.di.module.main.MainFragmentBuildersModule
+import com.app.di.module.main.MainScope
 import com.app.di.module.main.MainViewModelsModule
 import com.app.di.module.main.news.NewsApiModule
 import com.app.di.module.main.post.PostApiModule
@@ -14,9 +16,11 @@ import com.app.ui.main.MainActivity
 @Module
 internal abstract class ActivityBuilderModule {
 
+    @AuthScope
     @ContributesAndroidInjector(modules = [AuthViewModelsModule::class, AuthApiModule::class])
     abstract fun getAuthActivity(): AuthActivity
 
+    @MainScope
     @ContributesAndroidInjector(modules = [MainFragmentBuildersModule::class, MainViewModelsModule::class, PostApiModule::class, NewsApiModule::class])
     abstract fun getMainActivity(): MainActivity
 }

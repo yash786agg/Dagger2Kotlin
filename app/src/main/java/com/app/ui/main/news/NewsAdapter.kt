@@ -20,7 +20,6 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.MyViewHolder>()
     {
         val binding : ListItemNewsBinding = DataBindingUtil
             .inflate(LayoutInflater.from(parent.context), R.layout.list_item_news, parent, false)
-
         return MyViewHolder(binding)
     }
 

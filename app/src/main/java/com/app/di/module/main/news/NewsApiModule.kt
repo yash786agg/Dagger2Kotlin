@@ -1,5 +1,6 @@
 package com.app.di.module.main.news
 
+import com.app.di.module.main.MainScope
 import com.app.network.news.NewsApi
 import com.app.ui.main.news.NewsAdapter
 import dagger.Module
@@ -12,6 +13,7 @@ class NewsApiModule
     @Module
     companion object
     {
+        @MainScope
         @Provides
         @JvmStatic
         fun providePostApi(retrofit: Retrofit) : NewsApi
