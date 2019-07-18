@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.app.network.auth.AuthApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.app.models.User
 import com.app.util.NetworkResource
 
@@ -37,40 +37,32 @@ class AuthViewModel @Inject constructor(app: Application/*, private val reposito
         {
             authUser = MutableLiveData() // Initialization of MutableLiveData.
 
-            authenticateWithId(userId)
+            viewModelScope.launch{
+                authenticateWithId(userId)
+            }
         }
 
         return authUser!!
     }
 
-    fun authenticateWithId(userId : Int)
+    private suspend fun authenticateWithId(userId : Int)
     {
         authUser!!.value = NetworkResource.Loading(null)
 
-        // Start a Co-routine
-        GlobalScope.launch(Dispatchers.Default) {
+        //Do operations on some thread async
+        try
+        {
+            val response = authApi.getUserData(userId).await()
 
-            //Do operations on some thread async
-            try
-            {
-                val response = authApi.getUserData(userId).await()
-
-                withContext(Dispatchers.Main) {
-                    // Perform operations on the main thread
-                    authUser!!.value = NetworkResource.Success(response)
-                }
+            withContext(Dispatchers.Main) {
+                // Perform operations on the main thread
+                authUser!!.value = NetworkResource.Success(response)
             }
-            catch (e: HttpException)
-            {
-                e.printStackTrace()
-
-                withContext(Dispatchers.Main) {
-                    // Perform operations on the main thread
-
-                    authUser!!.value = NetworkResource.Error(e.code().toString(),null)
-                }
-
-            }
+        }
+        catch (e: HttpException)
+        {
+            e.printStackTrace()
+            authUser!!.value = NetworkResource.Error(e.code().toString(),null)
         }
     }
 }
