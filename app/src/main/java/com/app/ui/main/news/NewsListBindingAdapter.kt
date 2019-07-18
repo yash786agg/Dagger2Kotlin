@@ -13,6 +13,12 @@ import com.facebook.drawee.backends.pipeline.Fresco
 
 object NewsListBindingAdapter
 {
+    /*
+    * Links - https://blog.stylingandroid.com/data-binding-part-2/
+    * https://philio.me/using-android-data-binding-adapters-with-dagger-2/
+    * https://medium.com/@thinkpanda_75045/defining-android-binding-adapter-in-kotlin-b08e82116704
+    * */
+
     @JvmStatic
     @BindingAdapter("newsItemImage")
     fun newsItemImage(imageView: SimpleDraweeView, newsEntity: NewsEntity)
