@@ -11,3 +11,4 @@ interface AuthApi
     @GET("users/{id}")
     fun getUserData(@Path("id") id : Int) : Deferred<User>
 }
+

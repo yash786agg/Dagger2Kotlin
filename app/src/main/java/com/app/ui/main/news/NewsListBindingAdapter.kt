@@ -9,17 +9,20 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.request.ImageRequest
 import com.app.util.Constants.Companion.httpTag
 import com.app.util.Constants.Companion.httpsTag
-import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder
 
-object NewsListBindingAdapter
+class NewsListBindingAdapter(fresco: PipelineDraweeControllerBuilder)
 {
     /*
     * Links - https://blog.stylingandroid.com/data-binding-part-2/
-    * https://philio.me/using-android-data-binding-adapters-with-dagger-2/
-    * https://medium.com/@thinkpanda_75045/defining-android-binding-adapter-in-kotlin-b08e82116704
     * */
 
-    @JvmStatic
+    private var fresco : PipelineDraweeControllerBuilder? = null
+
+    init {
+        this.fresco = fresco
+    }
+
     @BindingAdapter("newsItemImage")
     fun newsItemImage(imageView: SimpleDraweeView, newsEntity: NewsEntity)
     {
@@ -29,7 +32,7 @@ object NewsListBindingAdapter
 
             if (!TextUtils.isEmpty(thumbnailURL))
             {
-                val draweeController = Fresco.newDraweeControllerBuilder().setImageRequest(ImageRequest.fromUri(Uri.parse(thumbnailURL)))
+                val draweeController = fresco!!.setImageRequest(ImageRequest.fromUri(Uri.parse(thumbnailURL)))
                     .setOldController(imageView.controller).build()
                 imageView.controller = draweeController
             }

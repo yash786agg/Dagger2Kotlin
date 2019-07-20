@@ -28,7 +28,7 @@ class PostViewModel @Inject constructor(app : Application) : AndroidViewModel(ap
         if (userPost == null)
         {
             userPost = MutableLiveData() // Initialization of MutableLiveData.
-            viewModelScope.launch{  // Dispatchers.Main
+            viewModelScope.launch {  // Dispatchers.Main
                 getUserPost(userId) // Dispatchers.Main (suspend function call)
             }
         }
